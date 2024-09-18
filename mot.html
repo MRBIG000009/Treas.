@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mot</title>
+        <link rel="icon" type="image/png" href="logo-treas.png" sizes="32x32">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .page-content {
+            flex: 1; /* Permet au contenu de pousser le footer en bas */
+            padding: 2rem; /* Ajoute un peu de padding autour du contenu */
+          
+        }
+        
+        header {
+            background-color: #b22222;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+        }
+        header img {
+            max-width: 150px;
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+        }
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+        .menu-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        #nav {
+            display: flex;
+            justify-content: center;
+            
+        }
+        #nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        #nav a:hover {
+            text-decoration: underline;
+        }
+        @media screen and (max-width: 768px) {
+    #nav {
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.5); /* Couleur avec transparence */
+        backdrop-filter: blur(10px); /* Appliquer un effet de flou */
+        position: fixed;
+        top: 0;
+        left: -100%; /* Hors de l'écran au départ */
+        width: 30%; /* Largeur de la barre de navigation */
+        height: 100%;
+        padding: 2rem;
+        transition: left 0.3s ease; /* Animation de transition */
+        z-index: 1000; /* S'assurer que le menu est au-dessus du contenu */
+    }
+
+    #nav.active {
+        left: 0; /* Ramener la barre sur l'écran */
+    }
+
+    #nav a {
+        color: #fff;
+        margin: 1rem 0;
+        text-align: left; /* Texte aligné à gauche */
+        font-size: 1.2rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+}
+@media screen and (max-width: 768px) {
+    header {
+        text-align: center; /* Centrer les éléments de l'en-tête */
+        position: relative;
+    }
+
+    header img {
+        position: static; /* Enlever la position absolue en mode mobile */
+        margin-bottom: 1rem; /* Ajouter un peu d'espace en dessous du logo */
+    }
+
+    h1 {
+        margin-top: 0;
+    }
+}
+        
+        
+        section {
+            background-color: #fff;
+            border : 10px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        h2 {
+            border-bottom: 3px solid #b22222;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            color: #b22222;
+        }
+        
+        footer {
+            background-color: #b22222;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            
+           
+            
+            bottom: 0
+            
+        }
+        
+        /* Formulaire de mot de passe */
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: 0 auto;
+            
+        }
+        
+        form input {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        form button {
+            padding: 0.75rem;
+            background-color: #b22222;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        form button:hover {
+            background-color: black;
+        }
+          @media (max-width: 500px) {
+  h1 {
+    font-size: 1.5rem; /* Taille réduite pour les petits écrans */
+  }
+  #indice { color : #b22222; font-size : 0.7em;}
+  
+  h2 {
+    font-size: 1.2rem; /* Taille réduite pour les petits écrans */
+  }
+}
+        
+                
+        
+        
+        
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.jpg" alt="Logo de l'entreprise">
+        <h1>Bienvenue sur TREAS-NOTE</h1>
+        <div class="menu-toggle" id="menu-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Accueil</a>
+            <a href="blog.html">Blog</a>
+            <a href="mot.html">Notes</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="page-content">
+        <!-- Formulaire de mot de passe -->
+        <section>
+            <h2>Accéder à la page des notes</h2>
+            <p id="indice">Indice : Le nom de notre école en abrégé et tout en majuscule. </p>
+            <form id="password-form">
+                <input type="password" id="password" placeholder="Entrez le mot de passe" required>
+                <button type="submit">Valider</button>
+            </form>
+            <p id="error-message" style="color:red; display:none;">Mot de passe incorrect, veuillez réessayer.</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TREAS. Tous droits réservés.</p>
+        <p>Build by VOLMAR KARLY </p>
+    </footer>
+
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            var nav = document.getElementById('nav');
+            nav.classList.toggle('active');
+        });
+
+        document.getElementById('password-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var password = document.getElementById('password').value;
+            var errorMessage = document.getElementById('error-message');
+            
+            if (password === 'PSCSM') {
+                window.location.href = 'notes.html';
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
+     
+</body>
+</html>

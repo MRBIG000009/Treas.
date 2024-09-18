@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulaire de Commentaires</title>
+      <link rel="icon" type="image/png" href="logo-treas.png" sizes="32x32">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    @media (max-width: 500px) {
+  h1 {
+    font-size: 1.5rem; /* Taille réduite pour les petits écrans */
+  }
+  h2 {
+    font-size: 1.2rem; /* Taille réduite pour les petits écrans */
+  }
+}
+    #commentForm, #comments {
+     
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      color : #b22222;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin : 20px;
+    }
+    h2 {
+      text-align: center; color : #b22222;
+    }
+    h1 { color : white;}
+     #postSelect {
+       width: 100%;
+     }
+    textarea, input[type="email"],   select, input[type="password"] {
+      width: calc(100% - 22px);
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    textarea {
+      height: 100px;
+    }
+    
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      background-color: #b22222;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+    button:hover {
+      background-color: black;
+    }
+    .comment {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 10px;
+    }
+    .comment hr {
+      margin: 10px 0;
+    }
+    .confirmation, .error {
+      text-align: center;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+    .confirmation {
+      color: green;
+    }
+    .error {
+      color: red;
+    }
+    #deleteSection {
+      margin-top: 40px; /* Espace entre les sections */
+      margin : 20px;
+    }
+    #comments { margin-top : 30px;}
+    header {
+            background-color: #b22222;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+          
+        }
+        header img {
+            max-width: 150px;
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+        }
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+        .menu-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        #nav {
+            display: flex;
+            justify-content: center;
+            
+        }
+        #nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        #nav a:hover {
+            text-decoration: underline;
+        }
+        @media screen and (max-width: 768px) {
+    #nav {
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.5); /* Couleur avec transparence */
+        backdrop-filter: blur(10px); /* Appliquer un effet de flou */
+        position: fixed;
+        top: 0;
+        left: -100%; /* Hors de l'écran au départ */
+        width: 30%; /* Largeur de la barre de navigation */
+        height: 100%;
+        padding: 2rem;
+        transition: left 0.3s ease; /* Animation de transition */
+        z-index: 1000; /* S'assurer que le menu est au-dessus du contenu */
+    }
+
+    #nav.active {
+        left: 0; /* Ramener la barre sur l'écran */
+    }
+
+    #nav a {
+        color: #fff;
+        margin: 1rem 0;
+        text-align: left; /* Texte aligné à gauche */
+        font-size: 1.2rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+}
+@media screen and (max-width: 768px) {
+    header {
+        text-align: center; /* Centrer les éléments de l'en-tête */
+        position: relative;
+    }
+
+    header img {
+        position: static; /* Enlever la position absolue en mode mobile */
+        margin-bottom: 1rem; /* Ajouter un peu d'espace en dessous du logo */
+    }
+
+    h1 {
+        margin-top: 0;
+    }
+}
+        
+        @media (max-width: 769px) {
+  footer {
+    position: relative;
+    background-color: #b22222;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin: 0; /* Assurez-vous qu'il n'y a pas de marge supplémentaire */
+    position: relative ; /* Fixer le pied de page au bas de la fenêtre */
+    bottom: 0; /* Placer le pied de page au bas de la fenêtre */
+    
+  }
+}
+@media (min-width: 770px) {
+footer {
+    background-color: #b22222;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin: 0; /* Assurez-vous qu'il n'y a pas de marge supplémentaire */
+    /* Fixer le pied de page au bas de la fenêtre */
+    bottom: 0; /* Placer le pied de page au bas de la fenêtre */
+    /* Assurer que le pied de page prend toute la largeur */
+}
+  
+}
+  </style>
+</head>
+<body>
+     <header>
+        <img src="logo.jpg" alt="Logo de l'entreprise">
+        <h1>Envoyez un commentaire</h1>
+        <div class="menu-toggle" id="menu-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Accueil</a>
+            <a href="blog.html">Blog</a>
+            <a href="mot.html">Notes</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+    </header>
+ 
+  <div id="commentForm">
+     <h2>Ajouter un Commentaire</h2>
+    <select id="postSelect">
+      <option value="Post 1">Post 1</option>
+      <option value="Post 2">Post 2</option>
+      <option value="Post 3">Post 3</option>
+        <option value="Post 4">Post 4</option>
+    </select>
+    <input type="email" id="emailInput" placeholder="Votre email" required>
+    <textarea id="commentInput" placeholder="Votre commentaire..." required></textarea>
+    <button id="submitCommentButton">Envoyer</button>
+    <div class="confirmation" id="commentConfirmation" style="display:none;">Votre commentaire a été ajouté avec succès !</div>
+  </div>
+  
+  <div id="comments"></div>
+  
+  <div id="deleteSection">
+    <input type="password" id="passwordInput" placeholder="Entrez le mot de passe">
+    <button id="deleteAllButton">Supprimer tous les commentaires</button>
+    <div class="error" id="deleteError" style="display:none;">Erreur lors de la suppression des commentaires.</div>
+  </div>
+      
+    <footer>
+        <p>&copy; 2024 TREAS. Tous droits réservés.</p>
+        <p>Build by VOLMAR KARLY</p>
+    </footer>
+
+  <!-- Import Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, deleteDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+
+    // Configuration Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyDUVH-1kFv33IrLpNU577lEu_Du-UXpmZE",
+      authDomain: "treaspscsm-cb055.firebaseapp.com",
+      projectId: "treaspscsm-cb055",
+      storageBucket: "treaspscsm-cb055.appspot.com",
+      messagingSenderId: "413931853694",
+      appId: "1:413931853694:web:c654a5270361d4d38b452f"
+    };
+
+    // Initialisation de Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Fonction pour charger les commentaires
+    const loadComments = () => {
+      const commentsDiv = document.getElementById('comments');
+      const q = query(collection(db, "comments"), orderBy("timestamp"));
+
+      onSnapshot(q, (querySnapshot) => {
+        commentsDiv.innerHTML = '';  // Réinitialiser la zone des commentaires
+        querySnapshot.forEach((doc) => {
+          const commentData = doc.data();
+          const commentElement = document.createElement('div');
+          commentElement.className = 'comment';
+          commentElement.innerHTML = `
+            <strong>${commentData.email}</strong> sur ${commentData.post}
+            <p>${commentData.comment}</p>
+            <small>${new Date(commentData.timestamp.seconds * 1000).toLocaleDateString()} à ${new Date(commentData.timestamp.seconds * 1000).toLocaleTimeString()}</small>
+            <hr>
+          `;
+          commentsDiv.appendChild(commentElement);
+        });
+      });
+    };
+
+    // Fonction pour envoyer un commentaire
+    const sendComment = async () => {
+      const postSelect = document.getElementById('postSelect');
+      const emailInput = document.getElementById('emailInput');
+      const commentInput = document.getElementById('commentInput');
+      const confirmationMessage = document.getElementById('commentConfirmation');
+
+      const post = postSelect.value;
+      const email = emailInput.value;
+      const comment = commentInput.value;
+
+      if (email && comment) {
+        try {
+          await addDoc(collection(db, "comments"), {
+            post,
+            email,
+            comment,
+            timestamp: new Date()
+          });
+
+          emailInput.value = '';
+          commentInput.value = '';
+          confirmationMessage.style.display = 'block';
+
+          setTimeout(() => {
+            confirmationMessage.style.display = 'none';
+          }, 3000);
+
+        } catch (e) {
+          console.error("Erreur lors de l'ajout du commentaire : ", e);
+        }
+      } else {
+        alert("Veuillez remplir tous les champs.");
+      }
+    };
+
+    // Fonction pour supprimer tous les commentaires
+    const deleteAllComments = async () => {
+      const passwordInput = document.getElementById('passwordInput');
+      const deleteError = document.getElementById('deleteError');
+      const password = passwordInput.value;
+
+      if (password === '360') {
+        try {
+          const commentsSnapshot = await getDocs(collection(db, "comments"));
+          commentsSnapshot.forEach(async (doc) => {
+            await deleteDoc(doc.ref);
+          });
+          loadComments(); // Recharger les commentaires après suppression
+          passwordInput.value = ''; // Vider le champ du mot de passe
+        } catch (e) {
+          console.error("Erreur lors de la suppression des commentaires : ", e);
+          deleteError.style.display = 'block';
+        }
+      } else {
+        deleteError.textContent = 'Mot de passe incorrect.';
+        deleteError.style.display = 'block';
+      }
+    };
+
+    // Ajouter les écouteurs d'événements pour les boutons
+    document.getElementById('submitCommentButton').addEventListener('click', sendComment);
+    document.getElementById('deleteAllButton').addEventListener('click', deleteAllComments);
+
+    // Charger les commentaires au démarrage
+    window.onload = loadComments;
+  </script>
+  <script>
+            document.getElementById('menu-toggle').addEventListener('click', function() {
+            var nav = document.getElementById('nav');
+            nav.classList.toggle('active');
+        });
+    
+  </script>
+</body>
+</html>

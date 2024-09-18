@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="icon" type="image/png" href="logo-treas.png" sizes="32x32">
+  <title>Forum Cours</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: 'Arial', sans-serif;
+     
+    }
+
+    main {
+      flex: 1;
+    }
+
+    #profileSection {
+      background-color: #b22222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #profileSection h1 {
+      margin: 0;
+    }
+
+    #buttonsSection {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    #buttonsSection button {
+      background-color: #b22222;
+      color: white;
+      border-radius: 5px;
+      padding: 10px 20px;
+      margin: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #addNoteSection, #messagesSection {
+      display: none;
+      padding: 20px;
+      margin: 0 20px;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .note {
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-left: 5px solid #b22222;
+      border-radius: 5px;
+    }
+
+    .note a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    .note a:hover {
+      text-decoration: underline;
+    }
+
+    .note button {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    input, textarea {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .confirmation {
+      color: green;
+      display: none;
+      margin-bottom: 20px;
+    }
+
+    h2 { 
+      color: #b22222;
+    }
+
+    @media (max-width: 769px) {
+      footer {
+        background-color: #b22222;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        margin: 0; 
+        /* Assurez-vous qu'il n'y a pas de marge supplémentaire */
+        margin-top :30px;
+      }
+    }
+
+    @media (min-width: 770px) {
+      footer {
+        background-color: #b22222;
+        color: #fff;
+        text-align: center;
+        padding: 1rem;
+        margin-top : 30px;
+      }
+    }
+
+    div img { 
+      width: 100%; 
+      border-radius: 30px;
+    }
+
+    header {
+      background-color: #b22222;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+      position: relative;
+    }
+
+    header img {
+      max-width: 150px;
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    .menu-toggle .bar {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      margin: 3px 0;
+      transition: 0.3s;
+    }
+    #sendButton{ color : white; background-color : #b22222; padding : 10px;border-radius: 4px}
+
+    #nav {
+      display: flex;
+      justify-content: center;
+    }
+
+    #nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    #nav a:hover {
+      text-decoration: underline;
+    }
+    .messagesContainer { margin-bottom: 200px}
+
+    @media screen and (max-width: 768px) {
+      #nav {
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.5); /* Couleur avec transparence */
+        backdrop-filter: blur(10px); /* Appliquer un effet de flou */
+        position: fixed;
+        top: 0;
+        left: -100%; /* Hors de l'écran au départ */
+        width: 30%; /* Largeur de la barre de navigation */
+        height: 100%;
+        padding: 2rem;
+        transition: left 0.3s ease; /* Animation de transition */
+        z-index: 1000; /* S'assurer que le menu est au-dessus du contenu */
+      }
+
+      #nav.active {
+        left: 0; /* Ramener la barre sur l'écran */
+      }
+
+      #nav a {
+        color: #fff;
+        margin: 1rem 0;
+        text-align: left; /* Texte aligné à gauche */
+        font-size: 1.2rem;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      header {
+        text-align: center; /* Centrer les éléments de l'en-tête */
+        position: relative;
+      }
+
+      header img {
+        position: static; /* Enlever la position absolue en mode mobile */
+        margin-bottom: 1rem; /* Ajouter un peu d'espace en dessous du logo */
+      }
+
+      h1 {
+        margin-top: 0;
+      }
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 1.5rem; /* Taille réduite pour les petits écrans */
+      }
+
+      h2 {
+        font-size: 1.2rem; /* Taille réduite pour les petits écrans */
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.jpg" alt="Logo de l'entreprise">
+    <h1>Bienvenue sur TREAS-NOTE</h1>
+    <div class="menu-toggle" id="menu-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+    <nav id="nav">
+      <a href="index.html">Accueil</a>
+      <a href="blog.html">Blog</a>
+      <a href="mot.html">Notes</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Section des boutons pour basculer entre les notes et le formulaire -->
+    <div id="buttonsSection">
+      <button id="showNotesButton">Voir les notes ajoutées</button>
+      <button id="addNoteButton">Ajouter une note</button>
+    </div>
+
+    <!-- Section pour afficher les notes ajoutées -->
+    <div id="messagesSection">
+      <h2>Notes ajoutées :</h2>
+      <div id="messagesContainer"></div>
+    </div>
+
+    <!-- Section pour ajouter une note -->
+    <div id="addNoteSection">
+      <h2>Ajouter une note :</h2>
+      <input type="text" id="courseTitle" placeholder="Titre du cours">
+      <input type="text" id="courseLink" placeholder="Lien Google Drive du cours/Lien Quiz/ youtube...">
+      <input type="date" id="courseDate" placeholder="Date">
+      <input type="text" id="courseTheme" placeholder="Thème du cours">
+      <textarea id="postText" placeholder="Détails du cours..."></textarea>
+      <button id="sendButton">Publier</button>
+      <div class="confirmation" id="confirmationMessage">La note a été ajoutée avec succès !</div>
+    </div>
+  </main>
+  
+  <footer>
+    <p>&copy; 2024 TREAS. Tous droits réservés.</p>
+    <p>Build by VOLMAR KARLY </p>
+  </footer>
+  
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDUVH-1kFv33IrLpNU577lEu_Du-UXpmZE",
+      authDomain: "treaspscsm-cb055.firebaseapp.com",
+      projectId: "treaspscsm-cb055",
+      storageBucket: "treaspscsm-cb055.appspot.com",
+      messagingSenderId: "413931853694",
+      appId: "1:413931853694:web:c654a5270361d4d38b452f"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Fonction pour charger les notes ajoutées
+    const loadPosts = async () => {
+      const querySnapshot = await getDocs(collection(db, "posts"));
+      const messagesContainer = document.getElementById('messagesContainer');
+      messagesContainer.innerHTML = ''; // Effacer les anciens messages
+
+      querySnapshot.forEach((doc) => {
+        const note = doc.data();
+        const noteElement = document.createElement('div');
+        noteElement.classList.add('note');
+        noteElement.innerHTML = `
+          <h3>${note.title}</h3>
+          <p><a href="${note.link}" target="_blank">Lien du cours</a></p>
+          <p>Date: ${note.date}</p>
+          <p>Thème: ${note.theme}</p>
+          <button class="deleteButton" data-id="${doc.id}">Supprimer</button>
+        `;
+        messagesContainer.appendChild(noteElement);
+      });
+
+      // Ajouter un événement de suppression à chaque bouton
+      document.querySelectorAll('.deleteButton').forEach(button => {
+        button.addEventListener('click', async (event) => {
+          const noteId = event.target.getAttribute('data-id');
+          await deleteNote(noteId);
+        });
+      });
+    };
+
+    // Fonction pour envoyer une note
+    const sendPost = async () => {
+      const courseTitleInput = document.getElementById('courseTitle');
+      const courseLinkInput = document.getElementById('courseLink');
+      const courseDateInput = document.getElementById('courseDate');
+      const courseThemeInput = document.getElementById('courseTheme');
+      const postInput = document.getElementById('postText');
+      const confirmationMessage = document.getElementById('confirmationMessage');
+
+      const title = courseTitleInput.value;
+      const link = courseLinkInput.value;
+      const date = courseDateInput.value;
+      const theme = courseThemeInput.value;
+      const text = postInput.value;
+
+      // Vérifier que tous les champs sont remplis
+      if (title && link && date && theme && text) {
+        // Ajouter la note à Firestore
+        await addDoc(collection(db, "posts"), {
+          title,
+          link,
+          date,
+          theme,
+          text,
+          timestamp: new Date()
+        });
+
+        // Afficher un message de confirmation
+        confirmationMessage.style.display = 'block';
+
+        // Effacer les champs
+        courseTitleInput.value = '';
+        courseLinkInput.value = '';
+        courseDateInput.value = '';
+        courseThemeInput.value = '';
+        postInput.value = '';
+
+        // Masquer le message après 3 secondes
+        setTimeout(() => {
+          confirmationMessage.style.display = 'none';
+        }, 3000);
+
+        // Recharger les notes
+        loadPosts();
+      } else {
+        alert("Veuillez remplir tous les champs.");
+      }
+    };
+
+    // Fonction pour supprimer une note
+const deleteNote = async (id) => {
+  // Demander le mot de passe
+  const password = prompt("Veuillez entrer le mot de passe pour supprimer la note :");
+
+  // Vérifier si le mot de passe est correct
+  if (password === "360") {
+    if (confirm("Voulez-vous vraiment supprimer cette note ?")) {
+      await deleteDoc(doc(db, "posts", id));
+      loadPosts();
+    }
+  } else {
+    alert("Mot de passe incorrect. La note n'a pas été supprimée.");
+  }
+};
+   
+
+    // Gestionnaire pour le bouton "Publier"
+    document.getElementById('sendButton').addEventListener('click', sendPost);
+
+    // Fonction pour afficher la section des notes ajoutées et cacher la section d'ajout de note
+    const showNotesSection = () => {
+      document.getElementById('messagesSection').style.display = 'block';
+      document.getElementById('addNoteSection').style.display = 'none';
+    };
+
+    // Fonction pour afficher la section d'ajout de note et cacher la section des notes
+    const showAddNoteSection = () => {
+      document.getElementById('messagesSection').style.display = 'none';
+      document.getElementById('addNoteSection').style.display = 'block';
+    };
+
+    // Gestionnaires pour les boutons
+    document.getElementById('showNotesButton').addEventListener('click', showNotesSection);
+    document.getElementById('addNoteButton').addEventListener('click', showAddNoteSection);
+
+    // Par défaut, afficher les notes ajoutées
+    window.onload = () => {
+      showNotesSection();
+      loadPosts();
+    };
+  </script>
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            var nav = document.getElementById('nav');
+            nav.classList.toggle('active');
+        });
+    </script>
+   
+</body>
+</html>

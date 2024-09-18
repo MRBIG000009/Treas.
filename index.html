@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+    <link rel="icon" type="image/png" href="logo-treas.png" sizes="32x32">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            line-height: 1.6;
+        }
+        #visitCounter {
+    margin: 20px auto;
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    color: #b22222;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 1rem; /* Taille réduite */
+}
+
+#visitCounter h2 {
+    margin: 0;
+    font-size: 1rem; /* Taille réduite */
+}
+
+#visitCount {
+    font-weight: bold;
+}
+
+        header {
+            background-color: #b22222;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+        }
+        header img {
+            max-width: 150px;
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+        }
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+        .menu-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        #nav {
+            display: flex;
+            justify-content: center;
+            
+        }
+        #nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        #nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2rem;
+        }
+        section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            transition: box-shadow 0.3s ease;
+        }
+        section:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            border-bottom: 3px solid #b22222;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            color : #b22222;
+        }
+         section a {
+          color : #b22222; text-decoration: none; font-style : italic; text-decoration : underline;
+        }
+        b { color : #b22222;}
+        .product {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .product img {
+            max-width: 150px;
+            border-radius: 8px;
+            margin-right: 1rem;
+        }
+        .product button {
+            background-color: #b22222;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .product button:hover {
+            background-color: black;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form input, form textarea {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        form button {
+            padding: 0.75rem;
+            background-color: #b22222;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        form button:hover {
+            background-color: black;
+        }
+        footer {
+            background-color: #b22222;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Style pour le menu hamburger en mode mobile */
+        /* Modifier le style du menu en mode mobile */
+@media screen and (max-width: 768px) {
+    #nav {
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.5); /* Couleur avec transparence */
+        backdrop-filter: blur(10px); /* Appliquer un effet de flou */
+        position: fixed;
+        top: 0;
+        left: -100%; /* Hors de l'écran au départ */
+        width: 30%; /* Largeur de la barre de navigation */
+        height: 100%;
+        padding: 2rem;
+        transition: left 0.3s ease; /* Animation de transition */
+        z-index: 1000; /* S'assurer que le menu est au-dessus du contenu */
+    }
+      @media (max-width: 500px) {
+  h1 {
+    font-size: 1.5rem; /* Taille réduite pour les petits écrans */
+  }
+  h2 {
+    font-size: 1.2rem; /* Taille réduite pour les petits écrans */
+  }
+}
+
+    #nav.active {
+        left: 0; /* Ramener la barre sur l'écran */
+    }
+
+    #nav a {
+        color: #fff;
+        margin: 1rem 0;
+        text-align: left; /* Texte aligné à gauche */
+        font-size: 1.2rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+}
+        @media screen and (max-width: 600px) {
+    .product {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product img {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+}
+@media screen and (max-width: 768px) {
+    header {
+        text-align: center; /* Centrer les éléments de l'en-tête */
+        position: relative;
+    }
+
+    header img {
+        position: static; /* Enlever la position absolue en mode mobile */
+        margin-bottom: 1rem; /* Ajouter un peu d'espace en dessous du logo */
+    }
+
+    h1 {
+        margin-top: 0;
+    }
+}
+h3 { color : #b22222;}
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.jpg" alt="Logo de l'entreprise">
+        <h1>Bienvenue sur TREAS</h1>
+        <div class="menu-toggle" id="menu-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Accueil</a>
+            <a href="blog.html">Blog</a>
+            <a href="mot.html">Notes</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <!-- Présentation de l'entreprise -->
+        <section id="presentation">
+            <h2>Présentation de TREAS</h2>
+            <p>Nous sommes la promotion 2026-2027 du Petit Séminaire Collège Saint Martial, fièrement connue sous le nom de <b>TREAS</b>, symbole de notre cohésion et de nos relations précieuses. Le terme <b>TREAS</b>, dérivé de <b>"TREASURE" (trésor)</b>, reflète notre engagement à travailler ensemble pour atteindre le succès et bâtir un avenir solide. Unis comme une famille, nous poursuivons l'excellence tout en contribuant activement à notre communauté scolaire.
+
+</p>
+        </section>
+        
+        <!-- Services -->
+        <section id="services">
+            <h2>NOS DEVISES </h2>
+            <p> Les devises de la promotion <b>TREAS</b> sont :</p>
+            <ul>
+                <li><b>T</b>ravailler avec <b>R</b>igueur et <b>E</b>ngagement pour un <b>A</b>venir <b>S</b>olide.</li>
+                <li><b>T</b>ravailler avec <b>R</b>éflexion et <b>E</b>ngagement pour <b>A</b>tteindre le <b>S</b>uccès.
+</li>
+                <li>Une force, une tradition, une famille </li>
+            </ul>
+        </section>
+        
+        <!-- Produits -->
+        <section id="produits">
+            <h2>À la une/<a href="blog.html">Accédez à notre blog</a></h2>
+            <div class="product">
+                <img src="scolaire.jpg" alt="Produit A">
+                <div>
+                    <h3>Calendrier Scolaire</h3>
+                    <p>Le calendrier scolaire de 2024-2025 désormais disponible... </p>
+                    <a href="blog.html#blog1">
+                    <button>Voir les détails</button></a>
+                </div>
+            </div>
+            <div class="product">
+                <img src="bulletin.png" alt="Produit B">
+                <div>
+                    <h3>Bulletin Scolaire</h3>
+                    <p> Félicitations à notre promotion ! 96% de réussite...</p>
+                    <a href="blog.html#blog3">
+                    <button>Voir les détails</button></a>
+                </div>
+            </div>
+            <div class="product">
+                <img src="materiel-papeterie-scolaire.jpg" alt="Produit C">
+                <div>
+                    <h3>La rentrée scolaire</h3>
+                    <p> La rentrée scolaire fixée le mardi 1er octobre...</p>
+                    <a href="blog.html#blog2">
+                    <button>Voir les détails</button></a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Histoire -->
+        <section id="histoire">
+            <h2>TREAS-NOTE</h2>
+            <p>Vous etes membres de la promotion ? Accédez à Treas-Note, une plateforme conçu pour vous accompagner durant votre année scolaire ; vous y trouverez des notes, les devoirs, etc...<a href="mot.html">Accédez</a></p>
+        </section>
+        
+        <!-- Formulaire de contact -->
+        <section id="contact">
+            <h2>Contactez-Nous</h2>
+            <form action="https://formspree.io/f/meojdabe" method="post">
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="message">Message :</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                
+                <button type="submit">Envoyer</button>
+            </form>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 TREAS. Tous droits réservés.</p>
+        <p>Build by VOLMAR KARLY </p>
+        <div id="visitCounter">
+    <h2>Visites : <span id="visitCount">0</span></h2>
+</div>
+
+    </footer>
+
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            var nav = document.getElementById('nav');
+            nav.classList.toggle('active');
+        });
+    </script>
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+
+    // Configuration Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyDUVH-1kFv33IrLpNU577lEu_Du-UXpmZE",
+        authDomain: "treaspscsm-cb055.firebaseapp.com",
+        projectId: "treaspscsm-cb055",
+        storageBucket: "treaspscsm-cb055.appspot.com",
+        messagingSenderId: "413931853694",
+        appId: "1:413931853694:web:c654a5270361d4d38b452f"
+    };
+
+    // Initialisation de Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Référence au document compteur de visites dans Firestore
+    const visitCounterDoc = doc(db, "site", "visitCounter");
+
+    // Fonction pour mettre à jour et afficher le compteur de visites
+    const updateVisitCounter = async () => {
+        try {
+            const docSnapshot = await getDoc(visitCounterDoc);
+            let currentCount = 0;
+
+            if (docSnapshot.exists()) {
+                currentCount = docSnapshot.data().count;
+            }
+
+            // Incrémenter le compteur de 1
+            const newCount = currentCount + 1;
+            await setDoc(visitCounterDoc, { count: newCount });
+
+            // Afficher le nouveau compteur
+            document.getElementById('visitCount').textContent = newCount;
+        } catch (e) {
+            console.error("Erreur lors de la mise à jour du compteur de visites : ", e);
+        }
+    };
+
+    // Appeler la fonction lors du chargement de la page
+    window.onload = updateVisitCounter;
+</script>
+
+</body>
+</html>

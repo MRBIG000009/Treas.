@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+        <link rel="icon" type="image/png" href="logo-treas.png" sizes="32x32">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        html, body {
+            height: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2rem;
+        }
+        section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            transition: box-shadow 0.3s ease;
+        }
+        #navbar2 {
+            margin-bottom: 1rem;
+        }
+        #navbar2 button {
+            background-color: #b22222;
+            color: #fff;
+            border: none;
+            padding: 0.75rem;
+            margin: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 4px;
+        }
+        #navbar2 button:hover {
+            background-color: black;
+        }
+        .article {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            flex: 1 1 300px; /* Largeur minimale des articles */
+        }
+        @media (max-width : 1000px){
+        .article:hover {
+       
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            background-color : #FFFFE0;
+        
+        }
+          
+        }
+        #ac {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .article img {
+    max-width: 100%;
+    border-radius: 3px;
+    border-bottom: 3px solid #b22222;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+        .article h1 {
+            font-size: 1.5rem;
+            margin-top: 0;
+        }
+        .article p {
+            margin: 1rem 0;
+        }
+        .article a {
+            color: #b22222;
+            text-decoration: none;
+        }
+        .article a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            background-color: #b22222;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            
+            bottom: 0;
+        }
+        footer section {
+            margin-bottom: 1rem;
+        }
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        header {
+            background-color: #b22222;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+        }
+        header img {
+            max-width: 150px;
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+        }
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+        .menu-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+           
+        #nav {
+            display: flex;
+            justify-content: center;
+        }
+        #nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        #nav a:hover {
+            text-decoration: underline;
+        }
+        @media screen and (max-width: 768px) {
+            #nav {
+                display: flex;
+                flex-direction: column;
+                background-color: rgba(0, 0, 0, 0.5); 
+                backdrop-filter: blur(10px); 
+                position: fixed;
+                top: 0;
+                left: -100%; 
+                width: 30%; 
+                height: 100%;
+                padding: 2rem;
+                transition: left 0.3s ease; 
+                z-index: 1000; 
+            }
+
+            #nav.active {
+                left: 0;
+            }
+
+            #nav a {
+                color: #fff;
+                margin: 1rem 0;
+                text-align: left; 
+                font-size: 1.2rem;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            header {
+                text-align: center;
+                position: relative;
+            }
+
+            header img {
+                position: static; 
+                margin-bottom: 1rem; 
+            }
+
+            h1 {
+                margin-top: 0;
+            }
+        }
+        @media (min-width: 1000px) {
+            #ac .article {
+                
+                border: 1px solid #ddd; 
+                margin-left : 30px;
+                background-color : yellow}
+                
+               #ac .article:hover {
+       
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            background-color : #fff;
+        
+            }
+        }
+         div h1 {color : #b22222;}
+           @media (max-width: 500px) {
+  h1 {
+    font-size: 1.5rem; /* Taille réduite pour les petits écrans */
+  }
+  h2 {
+    font-size: 1.2rem; /* Taille réduite pour les petits écrans */
+  }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.jpg" alt="Logo de l'entreprise">
+        <h1>Bienvenue sur TREAS-BLOG</h1>
+        <div class="menu-toggle" id="menu-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Accueil</a>
+            <a href="blog.html">Blog</a>
+            <a href="mot.html">Notes</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div id="navbar2">
+            <button id="rouge1">À la une</button>
+            <button id="rouge2">Événements</button>
+        </div>
+        <div id="ac">
+            <div class="article" id="blog1">
+                <img src="scolaire.jpg" alt="Calendrier Scolaire">
+                <h1>Calendrier Scolaire</h1>
+                <p>Voici le calendrier scolaire de l'année académique 2024-2025<br> <a href="https://drive.google.com/file/d/1jCaQ1xxaZT8i9Ad0RA_hETIjCKsFDAOr/view?usp=drivesdk">Voir le calendrier</a></p>
+                <a href="comments.html">Écrire un commentaire </a>
+            </div>
+            <div class="article" id="blog2">
+                <img src="/materiel-papeterie-scolaire.jpg" alt="Rentrée Scolaire">
+                <h1>Rentrée Scolaire</h1>
+                <p>La rentrée scolaire a été fixée au mardi 1er octobre 2024 par le ministère de l'Éducation nationale. À partir de cette date, les écoles ouvriront leurs portes pour accueillir les élèves.</p>
+                 <a href="comments.html">Écrire un commentaire </a>
+            </div>
+            <div class="article" id="blog3">
+                <img src="bulletin.png" alt="Résultats">
+                <h1>Résultats</h1>
+                <p>Félicitations à notre promotion ! Avec un taux de réussite de 96% et 96% d'admis en secondaire 2, l'année scolaire s'est conclue avec brio.</p>
+                   <a href="comments.html">Écrire un commentaire </a>
+            </div>
+               <div class="article" id="blog4">
+                <img src="logo-treas.png" alt="Résultats">
+                <h1>Notre logo</h1>
+                <p> Comment être élégant ? Vous n'avez qu'à regarder notre logo, vous trouverez la répons. </p>
+                      <a href="comments.html">Écrire un commentaire </a>
+            </div>
+        </div>
+
+        <div id="événements">
+            <div class="article" id="bloga">
+                <img src="materiel-papeterie-scolaire.jpg" alt="Rentrée Scolaire">
+                <h1>Rentrée Scolaire</h1>
+                <p>Date : Mardi 1er octobre 2024</p>
+                <a href="">Participer</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TREAS. Tous droits réservés.</p>
+        <p>Build by VOLMAR KARLY </p>
+    </footer>
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            var nav = document.getElementById('nav');
+            nav.classList.toggle('active');
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Références aux éléments
+            const boutonActivites = document.getElementById('rouge1');
+            const boutonEvenements = document.getElementById('rouge2'); // ID corrigé
+            const sectionActivites = document.getElementById('ac'); // ID corrigé
+            const sectionEvenements = document.getElementById('événements');
+
+            // Afficher les activités et masquer les événements par défaut
+            sectionEvenements.style.display = 'none';
+
+            // Ajouter les événements de clic pour les boutons
+            boutonActivites.addEventListener('click', function() {
+                sectionActivites.style.display = 'flex';
+                sectionEvenements.style.display = 'none';
+            });
+
+            boutonEvenements.addEventListener('click', function() {
+                sectionActivites.style.display = 'none';
+                sectionEvenements.style.display = 'flex';
+            });
+        });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    });
+</script>
+</body>
+</html>
