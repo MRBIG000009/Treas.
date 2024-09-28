@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +11,25 @@
       height: 100%;
       margin: 0;
     }
-
+ #filterCategory, #courseTitle { color : #fff; padding : 10px; background-color : #b22222; margin-bottom : 15px; border-radius : 4px}
     body {
       display: flex;
       flex-direction: column;
       font-family: 'Arial', sans-serif;
      
     }
+            #videoForm, #videosSection {
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            color: #b22222;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+        #videosSection {
+            display: none;
+        }
 
     main {
       flex: 1;
@@ -93,6 +106,7 @@
     .confirmation {
       color: green;
       display: none;
+      margin-top : 10px;
       margin-bottom: 20px;
     }
 
@@ -164,7 +178,18 @@
       display: flex;
       justify-content: center;
     }
-
+  #videoForm {
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            color: #b22222;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+         #videos{
+           padding : 10px;
+         }
     #nav a {
       color: #fff;
       text-decoration: none;
@@ -264,13 +289,69 @@
     <!-- Section pour afficher les notes ajoutées -->
     <div id="messagesSection">
       <h2>Notes ajoutées :</h2>
+      <select id="filterCategory">
+  <option value="">Toutes les catégories</option>
+  <option value="Anglais">Anglais</option>
+  <option value="Espagnol">Espagnol</option>
+  <option value="Littérature Française">Littérature Française</option>
+  <option value="Analyse">Analyse</option>
+  <option value="Trigonométrie">Trigonométrie</option>
+  <option value="Chimie Théorie">Chimie Théorie</option>
+  <option value="Chimie pratique">Chimie pratique(Labo)</option>
+  <option value="Physique/Électricité">Physique/Électricité</option>
+  <option value="Optique">Optique</option>
+  <option value="SVT">SVT</option>
+  <option value="Histoire de l'art">Histoire de l'art</option>
+  <option value="Arts plastiques">Arts plastiques</option>
+  <option value="EPS">EPS</option>
+  <option value="Statistique">Statistique</option>
+  <option value="Informatique et technologies">Informatique et technologies</option>
+  <option value="Catéchèse">Catéchèse</option>
+  <option value="Civisme">Civisme</option>
+  <option value="Économie">Économie</option>
+  <option value="Histoire Nationale">Histoire Nationale</option>
+  <option value="Histoire Universelle">Histoire Universelle</option>
+  <option value="Géographie">Géographie</option
+  <!-- Ajoutez dautres catégories si nécessaire -->
+</select>
+    
+  
       <div id="messagesContainer"></div>
+      
+      
+      
     </div>
 
     <!-- Section pour ajouter une note -->
     <div id="addNoteSection">
       <h2>Ajouter une note :</h2>
-      <input type="text" id="courseTitle" placeholder="Titre du cours">
+      <select id="courseTitle">
+  <option value="">Sélectionnez un  cours</option>
+  <option value="Anglais">Anglais</option>
+  <option value="Espagnol">Espagnol</option>
+  <option value="Littérature Française">Littérature Française</option>
+  <option value="Littérature Haïtienne">Littérature Haïtienne</option>
+  <option value="Kreyol">Kreyol</option>
+  <option value="Analyse">Analyse</option>
+  <option value="Trigonométrie">Trigonométrie</option>
+  <option value="Chimie Théorie">Chimie Théorie</option>
+  <option value="Chimie pratique">Chimie pratique(Labo)</option>
+  <option value="Physique/Électricité">Physique/Électricité</option>
+  <option value="Optique">Optique</option>
+  <option value="SVT">SVT</option>
+  <option value="Histoire de l'art">Histoire de l'art</option>
+  <option value="Arts plastiques">Arts plastiques</option>
+  <option value="EPS">EPS</option>
+  <option value="Statistique">Statistique</option>
+  <option value="Informatique et technologies">Informatique et technologies</option>
+  <option value="Catéchèse">Catéchèse</option>
+  <option value="Civisme">Civisme</option>
+  <option value="Économie">Économie</option>
+  <option value="Histoire Nationale">Histoire Nationale</option>
+  <option value="Histoire Universelle">Histoire Universelle</option>
+  <option value="Géographie">Géographie</option>
+</select>
+
       <input type="text" id="courseLink" placeholder="Lien Google Drive du cours/Lien Quiz/ youtube...">
       <input type="date" id="courseDate" placeholder="Date">
       <input type="text" id="courseTheme" placeholder="Thème du cours">
@@ -278,6 +359,12 @@
       <button id="sendButton">Publier</button>
       <div class="confirmation" id="confirmationMessage">La note a été ajoutée avec succès !</div>
     </div>
+    
+     
+   <div id="vid">
+     <div id="vid2"></div>
+     
+   </div> 
   </main>
   
   <footer>
@@ -429,7 +516,28 @@ const deleteNote = async (id) => {
             var nav = document.getElementById('nav');
             nav.classList.toggle('active');
         });
+        
+        
+        
+        // Fonction pour filtrer les notes en fonction de la catégorie sélectionnée
+const filterNotes = () => {
+  const filterValue = document.getElementById('filterCategory').value;
+  const notes = document.querySelectorAll('.note');
+
+  notes.forEach(note => {
+    const noteTitle = note.querySelector('h3').innerText;
+    if (filterValue === "" || noteTitle.includes(filterValue)) {
+      note.style.display = 'block'; // Afficher la note
+    } else {
+      note.style.display = 'none'; // Masquer la note
+    }
+  });
+};
+
+// Ajoutez un gestionnaire d'événements pour écouter les changements dans le menu déroulant
+document.getElementById('filterCategory').addEventListener('change', filterNotes); la 
+        
     </script>
-   
+
 </body>
-</html>
+        </html>
